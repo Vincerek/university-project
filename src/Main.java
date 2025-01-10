@@ -3,7 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main {
+public class Main extends JFrame {
+    public static JLabel label1;
+    public static JLabel label2;
+    public static JLabel label3;
 
     public static void main(String[] args) {
         // Create JFrame
@@ -13,11 +16,15 @@ public class Main {
         frame.setLayout(new GridLayout(2, 3));
 
         // Create a panel for labels
-        JPanel labelPanel = new JPanel(new GridLayout(1, 1));
-        JLabel label1 = new JLabel("Witaj w grze", SwingConstants.CENTER);
+        JPanel labelPanel = new JPanel(new GridLayout(3, 1));
+        label1 = new JLabel("Witaj w grze", SwingConstants.CENTER);
+        label2 = new JLabel("Witaj w grze", SwingConstants.CENTER);
+        label3 = new JLabel("Witaj w grze", SwingConstants.CENTER);
 
         // Add labels to the panel
         labelPanel.add(label1);
+        labelPanel.add(label2);
+        labelPanel.add(label3);
 
         // Add the label panel to the top of the frame
         frame.add(labelPanel, BorderLayout.NORTH);
