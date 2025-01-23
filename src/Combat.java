@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Combat extends Player {
+public class Combat{
 
 
     boolean playerTurn(int turn) {
@@ -9,24 +9,38 @@ public class Combat extends Player {
         } else return false;
     }
 
-    void combat(Player hero, Player enemy) {
+    public static void fight(Player hero, Player enemy) {
         int turn = 1;
 
-        while (hero.currentHealth > 0 && enemy.currentHealth > 0) {
-            label2.setText("\nIt's turn number " + turn);
-            label1.setText(String.format(
-                    "Your: Str:%d Dex:%d Int:%d HP:%d MP:%d Enemy: Str:%d Dex:%d Int:%d HP:%d MP:%d",
-                    hero.GetStrength(),
-                    hero.GetDexterity(),
-                    hero.GetIntelligence(),
-                    hero.currentHealth,
-                    hero.currentMana,
-                    enemy.GetStrength(),
-                    enemy.GetDexterity(),
-                    enemy.GetIntelligence(),
-                    enemy.currentHealth,
-                    enemy.currentMana
-            ));
+        Main.label2.setText("\nIt's turn number " + turn);
+        Main.label1.setText(String.format(
+                "Your: Str:%d Dex:%d Int:%d HP:%d MP:%d Enemy: Str:%d Dex:%d Int:%d HP:%d MP:%d",
+                hero.GetStrength(),
+                hero.GetDexterity(),
+                hero.GetIntelligence(),
+                hero.currentHealth,
+                hero.currentMana,
+                enemy.GetStrength(),
+                enemy.GetDexterity(),
+                enemy.GetIntelligence(),
+                enemy.currentHealth,
+                enemy.currentMana));
+
+//        while (hero.currentHealth > 0 && enemy.currentHealth > 0) {
+//            Main.label2.setText("\nIt's turn number " + turn);
+//            Main.label1.setText(String.format(
+//                    "Your: Str:%d Dex:%d Int:%d HP:%d MP:%d Enemy: Str:%d Dex:%d Int:%d HP:%d MP:%d",
+//                    hero.GetStrength(),
+//                    hero.GetDexterity(),
+//                    hero.GetIntelligence(),
+//                    hero.currentHealth,
+//                    hero.currentMana,
+//                    enemy.GetStrength(),
+//                    enemy.GetDexterity(),
+//                    enemy.GetIntelligence(),
+//                    enemy.currentHealth,
+//                    enemy.currentMana
+//            ));
 
 /*            if (playerTurn(turn))
             {
@@ -65,7 +79,10 @@ public class Combat extends Player {
             // TODO: Win
 
 
-        }
+        //}
 
+    }
+    public static void main(String []args){
+        //fight(Player.listaStworzen.get(0), Player.listaStworzen.get(1));
     }
 }

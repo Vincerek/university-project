@@ -1,4 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player extends Main{
+
+    public static List<Player> listaStworzen = new ArrayList<>();
     // primary stats
     private int level;
     private int maxHealth;
@@ -25,6 +30,7 @@ public class Player extends Main{
         speed = 10;
         defense = 0;
         criticalChance = 10;
+        listaStworzen.add(this);
     }
     Player(int baseLevel, int str, int dex, int intel){
         level = baseLevel;
@@ -38,6 +44,7 @@ public class Player extends Main{
         speed = dex;
         defense = 0;
         criticalChance = 10;
+        listaStworzen.add(this);
     }
 
     public int GetStrength() { return this.strength; }
@@ -47,4 +54,9 @@ public class Player extends Main{
     public void UpStrength() { this.strength += 5; this.maxHealth += 50; }
     public void UpDexterity() { this.dexterity += 5; this.speed = dexterity;}
     public void UpIntelligence() { this.intelligence += 5; this.maxMana += 50; }
+
+    public static void main(String []args){
+        Player Gracz3 = new Player();
+        Player Gracz4 = new Player();
+    }
 }
