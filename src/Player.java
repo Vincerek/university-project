@@ -4,6 +4,7 @@ import java.util.List;
 public class Player extends Main{
 
     public static List<Player> listaStworzen = new ArrayList<>();
+    private String name;
     // primary stats
     private int level;
     private int maxHealth;
@@ -11,52 +12,39 @@ public class Player extends Main{
     private int maxMana;
     public int currentMana;
     private int strength;
-    private int dexterity;
     private int intelligence;
-    private int speed;
-    private int defense;
-    private int criticalChance;
 
 
     Player(){
+        name = "Nameless";
         level = 1;
         maxHealth = 100;
         currentHealth = maxHealth;
         maxMana = 100;
         currentMana = maxMana;
         strength = 10;
-        dexterity = 10;
         intelligence = 10;
-        speed = 10;
-        defense = 0;
-        criticalChance = 10;
         listaStworzen.add(this);
     }
-    Player(int baseLevel, int str, int dex, int intel){
+    Player(String name, int baseLevel, int str, int dex, int intel){
+        this.name = name;
         level = baseLevel;
         maxHealth =baseLevel*10 + str*10 -10;
         currentHealth = maxHealth;
         maxMana =baseLevel*10 + intel*10 - 10;
         currentMana = maxMana;
         strength = str;
-        dexterity = dex;
         intelligence = intel;
-        speed = dex;
-        defense = 0;
-        criticalChance = 10;
         listaStworzen.add(this);
     }
-
+    public String GetName() { return this.name; }
     public int GetStrength() { return this.strength; }
-    public int GetDexterity() { return this.dexterity; }
     public int GetIntelligence() { return this.intelligence; }
 
-    public void UpStrength() { this.strength += 5; this.maxHealth += 50; }
-    public void UpDexterity() { this.dexterity += 5; this.speed = dexterity;}
-    public void UpIntelligence() { this.intelligence += 5; this.maxMana += 50; }
+    public void UpStrength(int x) { this.strength += x; this.maxHealth += 10*x; }
+    public void UpIntelligence(int x) { this.intelligence += x; this.maxMana += 10*x; }
 
     public static void main(String []args){
-        Player Gracz3 = new Player();
-        Player Gracz4 = new Player();
+
     }
 }
