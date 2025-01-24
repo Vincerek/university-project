@@ -26,7 +26,18 @@ public class Player extends Main{
         intelligence = 10;
         listaStworzen.add(this);
     }
-    Player(String name, int baseLevel, int str, int dex, int intel){
+    Player(String name){
+        this.name = name;
+        level = 1;
+        maxHealth = 100;
+        currentHealth = maxHealth;
+        maxMana = 100;
+        currentMana = maxMana;
+        strength = 10;
+        intelligence = 10;
+        listaStworzen.add(this);
+    }
+    Player(String name, int baseLevel, int str, int intel){
         this.name = name;
         level = baseLevel;
         maxHealth =baseLevel*10 + str*10 -10;

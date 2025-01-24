@@ -6,6 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends JFrame {
+
+    public static JLabel picture1;
+    public static JLabel picture2;
+
+    public static ImageIcon initialImage;
+    public static ImageIcon heroIdle;
+    public static ImageIcon heroAttack;
+    public static ImageIcon heroFireball;
+    public static ImageIcon heroAura;
+    public static ImageIcon bandit;
+    public static ImageIcon skeleton;
+    public static ImageIcon slime;
+    public static ImageIcon wolf;
+
+
     public static JLabel label1;
     public static JLabel label2;
     public static JLabel label3;
@@ -22,6 +37,10 @@ public class Main extends JFrame {
     public static BetterButtons b8;
     public static BetterButtons b9;
 
+    public static ActionListener[] originalActions;
+    public static ActionListener[] tempActions;
+    public static ActionListener[] combatActions;
+
     public static String actionState = "mainMenu";
 
 
@@ -29,8 +48,44 @@ public class Main extends JFrame {
         // Create JFrame
         JFrame frame = new JFrame("PlaceHolder na tytuł gry Filipa");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);
-        frame.setLayout(new GridLayout(2, 3));
+        frame.setSize(600, 800);
+        frame.setLayout(new GridLayout(3, 1));
+
+        //Create panel for imagebox
+        JPanel picturePanel = new JPanel(new GridLayout(1, 2));
+
+        //Create picture boxes
+        picture1 = new JLabel();
+        picture1.setHorizontalAlignment(JLabel.CENTER);
+        picture1.setVerticalAlignment(JLabel.CENTER);
+        picture1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        picture2 = new JLabel();
+        picture2.setHorizontalAlignment(JLabel.CENTER);
+        picture2.setVerticalAlignment(JLabel.CENTER);
+        picture2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        //Add pictureBoxes to panel
+        picturePanel.add(picture1,BorderLayout.CENTER);
+        picturePanel.add(picture2,BorderLayout.CENTER);
+
+        //Load initial images
+        initialImage = new ImageIcon("sprites/coin.gif");
+        heroIdle = new ImageIcon("sprites/hero_idle.gif");
+        heroAttack = new ImageIcon("sprites/hero_attack.gif");
+        heroFireball = new ImageIcon("sprites/fireball.gif");
+        heroAura = new ImageIcon("sprites/aura.gif");
+        bandit = new ImageIcon("sprites/bandit.gif");
+        skeleton = new ImageIcon("sprites/skeleton.gif");
+        slime = new ImageIcon("sprites/slime.gif");
+        wolf = new ImageIcon("sprites/wolf.gif");
+
+        //Set initial images
+        picture1.setIcon(initialImage);
+        picture2.setIcon(initialImage);
+
+        //Add picture panel to the top of the frame
+        frame.add(picturePanel, BorderLayout.NORTH);
 
         // Create a panel for labels
         JPanel labelPanel = new JPanel(new GridLayout(5, 1));
@@ -46,7 +101,7 @@ public class Main extends JFrame {
         labelPanel.add(label3);
         labelPanel.add(label4);
         labelPanel.add(label5);
-        // Add the label panel to the top of the frame
+        // Add the label panel to the middle
         frame.add(labelPanel, BorderLayout.NORTH);
 
         // Create a panel for buttons
@@ -75,60 +130,58 @@ public class Main extends JFrame {
         buttonPanel.add(b8);
         buttonPanel.add(b9);
 
-        // Add the button panel to the center of the frame
+        // Add the button panel to the bottom of the frame
         frame.add(buttonPanel, BorderLayout.CENTER);
 
         // State tracking for buttons
 
         // Placeholder for temporary actions
-        ActionListener[] originalActions = new ActionListener[9];
-        ActionListener[] tempActions = new ActionListener[9];
-        ActionListener[] combatActions = new ActionListener[9];
+        originalActions = new ActionListener[9];
+        tempActions = new ActionListener[9];
+        combatActions = new ActionListener[9];
 
 
         // Define original actions
         originalActions[0] = e -> {
             System.out.println("B1 original action");
-            setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
+            //setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
         };
         originalActions[1] = e -> {
             System.out.println("Walka w górach");
-            Combat.setCombatButtonsNames();
-            setCombatActions(BetterButtons.getButtonList(), combatActions);
+            Player.listaStworzen.add(1,new Player("bandit"));
             Combat.fight(Player.listaStworzen.get(0),Player.listaStworzen.get(1));
 
         };
         originalActions[2] = e -> {
             System.out.println("B3 original action");
-            //setCombatActions(new JButton[]{b1, b2, b3, b4}, combatActions);
-            setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
+            //setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
         };
         originalActions[3] = e -> {
             System.out.println("Walka w lesie");
-            setCombatActions(BetterButtons.getButtonList(), combatActions);
+            Player.listaStworzen.add(1,new Player("wolf"));
             Combat.fight(Player.listaStworzen.get(0),Player.listaStworzen.get(1));
         };
         originalActions[4] = e -> {
             System.out.println("B4 original action");
-            setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
+            //setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
         };
         originalActions[5] = e -> {
             System.out.println("Walka w rzece");
-            setCombatActions(BetterButtons.getButtonList(), combatActions);
+            Player.listaStworzen.add(1,new Player("slime"));
             Combat.fight(Player.listaStworzen.get(0),Player.listaStworzen.get(1));
         };
         originalActions[6] = e -> {
             System.out.println("B6 original action");
-            setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
+            //setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
         };
         originalActions[7] = e -> {
             System.out.println("Walka w kopalni");
-            setCombatActions(BetterButtons.getButtonList(), combatActions);
+            Player.listaStworzen.add(1,new Player("skeleton"));
             Combat.fight(Player.listaStworzen.get(0),Player.listaStworzen.get(1));
         };
         originalActions[8] = e -> {
             System.out.println("B8 original action");
-            setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
+            //setTemporaryActions(new JButton[]{b1, b2, b3, b4}, tempActions);
         };
 
 
@@ -139,35 +192,35 @@ public class Main extends JFrame {
         };
         tempActions[1] = e -> {
 
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[2] = e -> {
             System.out.println("Odpocznij");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[3] = e -> {
             System.out.println("Kula ognia");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[4] = e -> {
             System.out.println("");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[5] = e -> {
             System.out.println("Medytuj");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[6] = e -> {
             System.out.println("Zwiększ siłę");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[7] = e -> {
             System.out.println("Zwiększ inteligencję");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
         tempActions[8] = e -> {
             System.out.println("Uciekaj");
-            resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
+            //resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
         };
 
 
@@ -209,17 +262,16 @@ public class Main extends JFrame {
         };
 
         // Set original actions initially
-        resetToOriginal(new JButton[]{b1, b2, b3, b4}, originalActions);
-
+        resetToOriginal(BetterButtons.getButtonList(), originalActions);
         frame.setVisible(true);
 
         // nowe dodane
-        createCharacters();
+        new Player("Filip",1,2,10);
     }
 
-    private static void resetToOriginal(JButton[] buttons, ActionListener[] originalActions) {
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];
+    private static void resetToOriginal(List<BetterButtons> buttons, ActionListener[] originalActions) {
+        for (int i = 0; i < buttons.size(); i++) {
+            JButton button = buttons.get(i);
             // Remove all existing listeners
             for (ActionListener al : button.getActionListeners()) {
                 button.removeActionListener(al);
@@ -230,11 +282,11 @@ public class Main extends JFrame {
         actionState = "mainMenu";
     }
 
-    private static void setTemporaryActions(JButton[] buttons, ActionListener[] tempActions) {
+    private static void setTemporaryActions(List<BetterButtons> buttons, ActionListener[] tempActions) {
         //if (isTemporaryState[0]) return; // Prevent re-setting if already in temporary state
 
-        for (int i = 0; i < buttons.length; i++) {
-            JButton button = buttons[i];
+        for (int i = 0; i < buttons.size(); i++) {
+            JButton button = buttons.get(i);
             // Remove all existing listeners
             for (ActionListener al : button.getActionListeners()) {
                 button.removeActionListener(al);
@@ -246,7 +298,7 @@ public class Main extends JFrame {
         actionState = "tempActions";
 
     }
-    private static void setCombatActions(List<BetterButtons> buttons, ActionListener[] combActions) {
+    public static void setCombatActions(List<BetterButtons> buttons, ActionListener[] combActions) {
         if (buttons.size() != combActions.length) {
             throw new IllegalArgumentException("Mismatch between buttons and combActions length");
         }
@@ -266,10 +318,4 @@ public class Main extends JFrame {
         actionState = "tempActions";
     }
 
-
-    private static void createCharacters(){
-        new Player();
-        new Player();
-
-    }
 }
